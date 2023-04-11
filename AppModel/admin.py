@@ -28,20 +28,17 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
+# 文献管理
 
-# 用户管理
-@admin.register(UserInfo)
-class UserInfoAdmin(ImportExportModelAdmin):
-    tmp_storage_class = CacheStorage
-    resource_class = UserInfoResource
-    list_display=['user_name','weixin_openid','nick_name','gender','nation','policy_role','household','is_bd','job_status','id_card','phone_number','mig_worker','company_name','labour_union','join_union','pic_head','desc']
-    search_fields =('user_name','weixin_openid','nick_name','gender','nation','policy_role','household','is_bd','job_status','id_card','phone_number','mig_worker','company_name','labour_union','join_union','pic_head','desc')
+@admin.register(LiteratureInfo)
+class LiteratureInfoAdmin(ImportExportModelAdmin):
+    list_display=['literature_name','literature_auth','literature_date','literature_perm','literature_class','literature_subclass','is_permited','doc_path']
+    search_fields =('literature_name','literature_auth','literature_date','literature_perm','literature_class','literature_subclass','is_permited','doc_path')
     fieldsets = [
-       ('用户数据', {'fields': ['user_name','gender','nation','policy_role','household','is_bd','job_status','id_card','phone_number','mig_worker','company_name','labour_union','join_union','pic_head','desc'], 'classes': ['']}),
+       ('用户数据', {'fields': ['literature_name','literature_auth','literature_date','literature_perm','literature_class','literature_subclass','is_permited','doc_path'], 'classes': ['']}),
     ]
     list_per_page = 15
-
-
+    
 
 admin.site.site_title = "科研文献管理系统1.0"
 admin.site.site_header = "科研文献管理系统1.0"

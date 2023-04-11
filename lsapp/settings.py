@@ -111,7 +111,7 @@ SIMPLEUI_CONFIG = {
         'icon': 'fab fa-dashcube',
         'models': [{
             'name': '文献管理',
-            'url': 'AppModel/companyinfo',
+            'url': 'AppModel/literatureinfo',
             'icon': 'fa fa-server'
         }]
         },{

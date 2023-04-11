@@ -9,6 +9,32 @@ from AppModel import *
 from multiselectfield import MultiSelectField
 
 
+class LiteratureInfo(models.Model):
+    class_choice = [
+        ("0", "工程技术"),
+        ("1", "数学与统计"),
+        ("2", "自然科学类"),
+    ]
+    subclass_choice =[
+        ("0", "计算机科学类"),
+        ("1", "建筑工程类"),
+        ("2", "数学类"),
+        ("3", "统计学类"),
+        ("4", "物理学"),
+        ("5", "化学"),
+        ("6", "生物学"),
+    ]
+    literature_name = models.CharField(max_length=200,verbose_name='文献标题')
+    literature_auth = models.CharField(max_length=200,verbose_name='文献作者')
+    literature_date = models.DateField(verbose_name='文献日期',default=datetime.date.today)
+    literature_perm = models.CharField(max_length=200,verbose_name='文献权限')
+    literature_class = models.CharField(max_length=200,verbose_name='文献分类',choices=class_choice,default=0)
+    literature_subclass = models.CharField(max_length=200,verbose_name='文献子类',choices=subclass_choice,default=0)
+    is_permited = models.BooleanField(verbose_name='是否通过审批',default="False")
+    doc_path = models.FileField(upload_to='uploads/',verbose_name='文献路径')
+    
+
+
 class UserInfo(models.Model):
     gender_choice = [
         ("0", "女"),
