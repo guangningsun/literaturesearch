@@ -32,6 +32,7 @@ class LiteratureInfo(models.Model):
     literature_subclass = models.CharField(max_length=200,verbose_name='文献子类',choices=subclass_choice,default=0)
     is_permited = models.BooleanField(verbose_name='是否通过审批',default="False")
     doc_path = models.FileField(upload_to='uploads/',verbose_name='文献路径')
+    upload_user = models.CharField(max_length=200,verbose_name='上传用户')
     
 
 

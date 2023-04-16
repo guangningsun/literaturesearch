@@ -20,6 +20,7 @@ from import_export.tmp_storages import CacheStorage
 from  .resource import UserInfoResource
 
 
+
 logger = logging.getLogger(__name__)
 logger.setLevel(level = logging.DEBUG)
 handler = logging.FileHandler("./lsapp.log")
@@ -32,15 +33,25 @@ logger.addHandler(handler)
 
 @admin.register(LiteratureInfo)
 class LiteratureInfoAdmin(ImportExportModelAdmin):
-    list_display=['literature_name','literature_auth','literature_date','literature_perm','literature_class','literature_subclass','is_permited','doc_path']
-    search_fields =('literature_name','literature_auth','literature_date','literature_perm','literature_class','literature_subclass','is_permited','doc_path')
+    list_display=['literature_name','literature_auth','literature_date','literature_perm','upload_user','literature_class','literature_subclass','is_permited','doc_path']
+    search_fields =('literature_name','literature_auth','literature_date','literature_perm','upload_user','literature_class','literature_subclass','is_permited','doc_path')
     fieldsets = [
        ('用户数据', {'fields': ['literature_name','literature_auth','literature_date','literature_perm','literature_class','literature_subclass','is_permited','doc_path'], 'classes': ['']}),
     ]
     list_per_page = 15
-    
 
+    def get_queryset(self,request):
+        qs = super(LiteratureInfoAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(upload_user=request.user.username).filter(is_permited=True)
+
+    def save_model(self, request, obj, form, change):
+        obj.upload_user = request.user
+        super().save_model(request, obj, form, change)
+    
 admin.site.site_title = "科研文献管理系统1.0"
 admin.site.site_header = "科研文献管理系统1.0"
+admin.site.login_template = 'login.html'
 
 

@@ -5,9 +5,14 @@ SECRET_KEY = 'y8)ahmo4#n)aoatj@en2r#f_u99l&b)%9z22+r--j7(+aq)w57'
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
+# 为评论添加
+SITE_ID =100
+
 INSTALLED_APPS = [
     'simpleui',
     'rest_framework',
+    'django_comments',
+    'django.contrib.sites',
     'django_filters',
     'import_export',
     'django.contrib.admin',
@@ -22,7 +27,33 @@ INSTALLED_APPS = [
     'mptt',
     'django_extensions',
     'werkzeug_debugger_runserver',
+    'social_django',
+    # 'simpleui_auth',
 ]
+
+# 第三方登录
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+    # 'simpleui_auth.backends.FacebookBackend',
+    # 'simpleui_auth.backends.GoogleBackend',
+    # 'simpleui_auth.backends.TwitterBackend',
+    # 'django.contrib.auth.backends.ModelBackend',
+)
+SOCIAL_AUTH_FACEBOOK_KEY = '<your-facebook-app-id>'
+SOCIAL_AUTH_FACEBOOK_SECRET = '<your-facebook-app-secret>'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '<your-google-oauth2-key>'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '<your-google-oauth2-secret>'
+SOCIAL_AUTH_TWITTER_KEY = '<your-twitter-key>'
+SOCIAL_AUTH_TWITTER_SECRET = '<your-twitter-secret>'
+# SIMPLEUI_AUTH_FACEBOOK_APP_ID = '<your-facebook-app-id>'
+# SIMPLEUI_AUTH_FACEBOOK_APP_SECRET = '<your-facebook-app-secret>'
+# SIMPLEUI_AUTH_GOOGLE_CLIENT_ID = '<your-google-client-id>'
+# SIMPLEUI_AUTH_GOOGLE_CLIENT_SECRET = '<your-google-client-secret>'
+# SIMPLEUI_AUTH_TWITTER_CONSUMER_KEY = '<your-twitter-consumer-key>'
+# SIMPLEUI_AUTH_TWITTER_CONSUMER_SECRET = '<your-twitter-consumer-secret>'
 
 # env need pip install django-cors-headers
 CORS_ORIGIN_ALLOW_ALL = True
