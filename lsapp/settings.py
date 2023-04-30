@@ -177,3 +177,8 @@ CSRF_COOKIE_SECURE = False
 SECURE_SSL_REDIRECT = False
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
 CONF_DIR = os.path.join(BASE_DIR, "conf/xz.conf")
+
+
+# SIMPLEUI_HOME_PAGE = '/tasks/dashboard/'
+# SIMPLEUI_HOME_TITLE = '控制面板!' 
+# SIMPLEUI_HOME_ICON = 'fa fa-eye'

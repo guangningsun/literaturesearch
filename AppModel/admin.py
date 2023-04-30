@@ -47,7 +47,10 @@ class LiteratureInfoAdmin(ImportExportModelAdmin):
         return qs.filter(upload_user=request.user.username).filter(is_permited=True)
 
     def save_model(self, request, obj, form, change):
-        obj.upload_user = request.user
+        if obj.upload_user == "":
+            obj.upload_user = request.user.username
+        elif obj.upload_user != request.user.username:
+            pass
         super().save_model(request, obj, form, change)
     
 admin.site.site_title = "科研文献管理系统1.0"

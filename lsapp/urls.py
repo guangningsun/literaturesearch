@@ -25,6 +25,8 @@ from social_django.urls import (
 urlpatterns = [
     url('admin/', admin.site.urls),
     re_path(r'^media/(?P<path>.+)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    url(r'^comments/', include('django_comments.urls')),
+    path('tasks/dashboard/', views.dashboard, name='dashboard'),
     url(r'^social-auth/', include(social_django_urls)),
     url(r'^restricted/', login_required(TemplateView.as_view(template_name='restricted.html'))),
     # url(r'^simpleui_auth/', include(simpleui_auth_urls)),
